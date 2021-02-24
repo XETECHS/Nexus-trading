@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_contract_crop_year,access.sale.contract.crop.year,model_sale_contract_crop_year,,1,1,1,1
+access_sale_contract_packing,access.sale.contract.packing,model_sale_contract_packing,,1,1,1,1
+access_sale_contract_port,access.sale.contract.port,model_sale_contract_port,,1,1,1,1
+access_sale_contract_document,access.sale.contract.document,model_sale_contract_document,,1,1,1,1
+access_sale_contract_remark,access.sale.contract.remark,model_sale_contract_remark,,1,1,1,1
+access_sale_contract_dimension,access.sale.contract.dimension,model_sale_contract_dimension,,1,1,1,1

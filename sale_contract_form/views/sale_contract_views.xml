@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+    <record id="sale_contract_crop_year_view_tree" model="ir.ui.view">
+        <field name="name">sale.contract.crop.year.view.tree</field>
+        <field name="model">sale.contract.crop.year</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" />
+                <field name="data" />
+                <field name="data2" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="sale_contract_packing_view_tree" model="ir.ui.view">
+        <field name="name">sale.contract.packing.view.tree</field>
+        <field name="model">sale.contract.packing</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" />
+                <field name="qty" />
+                <field name="uom_id" />
+                <field name="comment"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sale_contract_port_view_tree" model="ir.ui.view">
+        <field name="name">sale.contract.port.view.tree</field>
+        <field name="model">sale.contract.port</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" />
+                <field name="city" />
+                <field name="country_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="sale_contract_crop_year_action" model="ir.actions.act_window">
+        <field name="name">Crop Year</field>
+        <field name="res_model">sale.contract.crop.year</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <record id="sale_contract_packing_action" model="ir.actions.act_window">
+        <field name="name">Packing</field>
+        <field name="res_model">sale.contract.packing</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <record id="sale_contract_port_action" model="ir.actions.act_window">
+        <field name="name">Ports</field>
+        <field name="res_model">sale.contract.port</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem
+        id="sale_contract_crop_year_submenu"
+        name="Crop Year"
+        action="sale_contract_crop_year_action"
+        parent="sale.menu_sale_config"
+        sequence="10"/>
+
+
+    <menuitem
+        id="sale_contract_packing_submenu"
+        name="Packing"
+        action="sale_contract_packing_action"
+        parent="sale.menu_sale_config"
+        sequence="10"/>
+
+    <menuitem
+        id="sale_contract_port_submenu"
+        name="Ports"
+        action="sale_contract_port_action"
+        parent="sale.menu_sale_config"
+        sequence="10"/>
+
+</odoo>

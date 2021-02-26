@@ -56,3 +56,10 @@ class SaleContractDimension(models.Model):
     name = fields.Char(string='Name', required=True)
     data = fields.Char(string='Data')
     data2 = fields.Char(string='Data2')
+
+
+class SaleContractTerm(models.Model):
+    _name = 'sale.contract.term'
+    _description = 'Sale Contract Terms'
+
+    name = fields.Char(string='Name', required=True)

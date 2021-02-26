@@ -5,3 +5,4 @@ access_sale_contract_port,access.sale.contract.port,model_sale_contract_port,,1,
 access_sale_contract_document,access.sale.contract.document,model_sale_contract_document,,1,1,1,1
 access_sale_contract_remark,access.sale.contract.remark,model_sale_contract_remark,,1,1,1,1
 access_sale_contract_dimension,access.sale.contract.dimension,model_sale_contract_dimension,,1,1,1,1
+access_sale_contract_term,access.sale.contract.term,model_sale_contract_term,,1,1,1,1

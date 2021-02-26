@@ -25,9 +25,7 @@ class SaleOrder(models.Model):
     remarks_id = fields.Many2one('sale.contract.remark', string='Remarks')
     remarks = fields.Text(string='Remarks Text')
 
-    payment_term2_id = fields.Many2one(
-        'account.payment.term', string='Payment Terms2', check_company=True,  # Unrequired company
-        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",)
+    payment_term2_id = fields.Many2one('sale.contract.term', string='Payment Terms2')
 
     payment_term_text = fields.Text(string='Payment Term Text')
 

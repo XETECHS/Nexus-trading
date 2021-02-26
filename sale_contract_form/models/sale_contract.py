@@ -35,7 +35,7 @@ class SaleContractDocument(models.Model):
     _name = 'sale.contract.document'
     _description = 'Sale Contract Document'
 
-    name = fields.Char(string='Name')
+    name = fields.Char(string='Name', required=True)
     data = fields.Char(string='Data')
     data2 = fields.Char(string='Data2')
     comment = fields.Text(string='Comment')
@@ -45,7 +45,7 @@ class SaleContractRemark(models.Model):
     _name = 'sale.contract.remark'
     _description = 'Sale Contract Remark'
 
-    name = fields.Char(string='Name')
+    name = fields.Char(string='Name', required=True)
     data = fields.Char(string='Data')
     data2 = fields.Char(string='Data2')
 
@@ -53,6 +53,6 @@ class SaleContractDimension(models.Model):
     _name = 'sale.contract.dimension'
     _description = 'Sale Contract Dimension'
 
-    name = fields.Char(string='Name')
+    name = fields.Char(string='Name', required=True)
     data = fields.Char(string='Data')
     data2 = fields.Char(string='Data2')

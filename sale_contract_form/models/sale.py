@@ -37,4 +37,4 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     containers = fields.Float(string='Container', digits=(6, 2))
-    con_dimension = fields.Many2one('comodel_name', string='Containers Dimesion')
+    con_dimension = fields.Many2one('sale.contract.dimension', string='Containers Dimesion')

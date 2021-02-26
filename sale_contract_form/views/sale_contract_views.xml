@@ -39,6 +39,43 @@
         </field>
     </record>
 
+    <record id="sale_contract_document_view_tree" model="ir.ui.view">
+        <field name="name">sale.contract.document.view.tree</field>
+        <field name="model">sale.contract.document</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" />
+                <field name="data" />
+                <field name="data2" />
+                <field name="comment"></field>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sale_contract_remark_view_tree" model="ir.ui.view">
+        <field name="name">sale.contract.remark.view.tree</field>
+        <field name="model">sale.contract.remark</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" />
+                <field name="data" />
+                <field name="data2" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="sale_contract_dimension_view_tree" model="ir.ui.view">
+        <field name="name">sale.contract.dimension.view.tree</field>
+        <field name="model">sale.contract.dimension</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" />
+                <field name="data" />
+                <field name="data2" />
+            </tree>
+        </field>
+    </record>
+
     <record id="sale_contract_crop_year_action" model="ir.actions.act_window">
         <field name="name">Crop Year</field>
         <field name="res_model">sale.contract.crop.year</field>
@@ -57,11 +94,36 @@
         <field name="view_mode">tree</field>
     </record>
 
+    <record id="sale_contract_document_action" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">sale.contract.document</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <record id="sale_contract_remark_action" model="ir.actions.act_window">
+        <field name="name">Remarks</field>
+        <field name="res_model">sale.contract.remark</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <record id="sale_contract_dimension_action" model="ir.actions.act_window">
+        <field name="name">Dimensions</field>
+        <field name="res_model">sale.contract.dimension</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem
+        id="sale_contract_contract_settings_submenu"
+        name="Contract Settings"
+        action="sale_contract_crop_year_action"
+        parent="sale.menu_sale_config"
+        sequence="10"/>
+
     <menuitem
         id="sale_contract_crop_year_submenu"
         name="Crop Year"
         action="sale_contract_crop_year_action"
-        parent="sale.menu_sale_config"
+        parent="sale_contract_contract_settings_submenu"
         sequence="10"/>
 
 
@@ -69,14 +131,35 @@
         id="sale_contract_packing_submenu"
         name="Packing"
         action="sale_contract_packing_action"
-        parent="sale.menu_sale_config"
+        parent="sale_contract_contract_settings_submenu"
         sequence="10"/>
 
     <menuitem
         id="sale_contract_port_submenu"
         name="Ports"
         action="sale_contract_port_action"
-        parent="sale.menu_sale_config"
+        parent="sale_contract_contract_settings_submenu"
         sequence="10"/>
+    <menuitem
+        id="sale_contract_document_submenu"
+        name="Document"
+        action="sale_contract_document_action"
+        parent="sale_contract_contract_settings_submenu"
+        sequence="10"/>
+
+    <menuitem
+        id="sale_contract_remark_submenu"
+        name="Remark"
+        action="sale_contract_remark_action"
+        parent="sale_contract_contract_settings_submenu"
+        sequence="10"/>
+
+    <menuitem
+        id="sale_contract_dimension_submenu"
+        name="Dimension"
+        action="sale_contract_dimension_action"
+        parent="sale_contract_contract_settings_submenu"
+        sequence="10"/>
+    
 
 </odoo>

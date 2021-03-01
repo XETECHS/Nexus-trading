@@ -14,5 +14,6 @@
         'security/ir.model.access.csv',
         'views/sale_contract_views.xml',
         'views/sale_views.xml',
+        'views/sale_portal_templates.xml'
     ]
 }

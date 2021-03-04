@@ -46,6 +46,14 @@
                 <field name="client_order_ref" required="1"/> 
             </field>
 
+            <xpath expr="//div[hasclass('o_td_label')][2]" position="attributes">
+                <attribute name="attrs">{}</attribute>
+            </xpath>
+
+            <field name="date_order" position="attributes">
+                <attribute name="groups"></attribute>
+            </field>
+
             <xpath expr="//tree/field[@name='price_unit']" position="after">
                 <field name="containers" />
                 <field name="con_dimension" />

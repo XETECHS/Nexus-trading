@@ -2,8 +2,8 @@
 <odoo>
     <data>
         <template id="portal_my_purchase_order" inherit_id="purchase.portal_my_purchase_order">
-            <xpath expr="//ul[hasclass('list-group')]" position="inside">
-                <a role="button" class="btn btn-primary btn-block mb8" data-toggle="modal" data-target="#modalaccept" href="#">
+            <xpath expr="//li[hasclass('list-group-item')][1]" position="inside">
+                <a t-if="order.state == 'draft'" role="button" class="btn btn-primary btn-block mb8" data-toggle="modal" data-target="#modalaccept" href="#">
                     <i class="fa fa-check"/> <span>Accept &amp; Sign</span>
                 </a>
 

@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
 
 import base64
-from datetime import datetime
 import binascii
 
-from odoo import fields, http
+from collections import OrderedDict
+from datetime import datetime
+
+from odoo import fields, http, _
 from odoo.exceptions import AccessError, MissingError
 from odoo.http import request, Response
 from odoo.tools import image_process
 from odoo.tools.translate import _
-from odoo.addons.portal.controllers.portal import CustomerPortal
+from odoo.addons.portal.controllers.portal import pager as portal_pager, CustomerPortal
+from odoo.addons.web.controllers.main import Binary
 
 
 class CustomerPortal(CustomerPortal):
@@ -34,7 +37,7 @@ class CustomerPortal(CustomerPortal):
             request.env.cr.commit()
         except (TypeError, binascii.Error) as e:
             return {'error': _('Invalid signature data.')}
-        # order_sudo.action_confirm()
+        order_sudo.button_confirm()
         # order_sudo._send_order_confirmation_mail()
 
         # pdf = request.env.ref('sale.action_report_saleorder').sudo()._render_qweb_pdf([order_sudo.id])[0]
@@ -51,3 +54,67 @@ class CustomerPortal(CustomerPortal):
             'force_refresh': True,
             'redirect_url': order_sudo.get_portal_url(query_string=query_string),
         }
+
+    @http.route(['/my/purchase', '/my/purchase/page/<int:page>'], type='http', auth="user", website=True)
+    def portal_my_purchase_orders(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
+        values = self._prepare_portal_layout_values()
+        PurchaseOrder = request.env['purchase.order']
+
+        domain = []
+
+        if date_begin and date_end:
+            domain += [('create_date', '>', date_begin), ('create_date', '<=', date_end)]
+
+        searchbar_sortings = {
+            'date': {'label': _('Newest'), 'order': 'create_date desc, id desc'},
+            'name': {'label': _('Name'), 'order': 'name asc, id asc'},
+            'amount_total': {'label': _('Total'), 'order': 'amount_total desc, id desc'},
+        }
+        # default sort by value
+        if not sortby:
+            sortby = 'date'
+        order = searchbar_sortings[sortby]['order']
+
+        searchbar_filters = {
+            'all': {'label': _('All'), 'domain': [('state', 'in', ['draft','purchase', 'done', 'cancel'])]},
+            'purchase': {'label': _('Purchase Order'), 'domain': [('state', '=', 'purchase')]},
+            'cancel': {'label': _('Cancelled'), 'domain': [('state', '=', 'cancel')]},
+            'draft': {'label': _('RFQ'), 'domain': [('state', '=', 'draft')]},
+            'done': {'label': _('Locked'), 'domain': [('state', '=', 'done')]},
+        }
+        # default filter by value
+        if not filterby:
+            filterby = 'all'
+        domain += searchbar_filters[filterby]['domain']
+
+        # count for pager
+        purchase_count = PurchaseOrder.search_count(domain)
+        # make pager
+        pager = portal_pager(
+            url="/my/purchase",
+            url_args={'date_begin': date_begin, 'date_end': date_end, 'sortby': sortby, 'filterby': filterby},
+            total=purchase_count,
+            page=page,
+            step=self._items_per_page
+        )
+        # search the purchase orders to display, according to the pager data
+        orders = PurchaseOrder.search(
+            domain,
+            order=order,
+            limit=self._items_per_page,
+            offset=pager['offset']
+        )
+        request.session['my_purchases_history'] = orders.ids[:100]
+
+        values.update({
+            'date': date_begin,
+            'orders': orders,
+            'page_name': 'purchase',
+            'pager': pager,
+            'searchbar_sortings': searchbar_sortings,
+            'sortby': sortby,
+            'searchbar_filters': OrderedDict(sorted(searchbar_filters.items())),
+            'filterby': filterby,
+            'default_url': '/my/purchase',
+        })
+        return request.render("purchase.portal_my_purchase_orders", values)

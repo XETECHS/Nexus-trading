@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
             <page name="purchase_delivery_invoice" position="before">
-                <page string="Sale Contract Details" name="sale_contract_details">
+                <page string="Purchase Contract Details" name="sale_contract_details">
                     <group col="4">
                         <field name="country_origin_id" />
                         <field name="crop_year_id" />

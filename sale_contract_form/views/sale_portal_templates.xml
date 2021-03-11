@@ -130,6 +130,17 @@
                         <p><strong>Remarks Text:</strong> <span t-field="sale_order.remarks"/></p>
                     </div>
                 </div>
+                <h3 class="">Documents</h3>
+                <hr class="mt-0 mb-1"/>
+                <t t-set="documents" t-value="sale_order.document_ids.mapped('name')"/>
+                <div class="row ml-1">
+                    <t t-foreach="documents" t-as="doc">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" t-att-id="'%sCheck'%doc" t-att-checked="True"/>
+                            <label class="form-check-label" t-att-for="'%sCheck'%doc" t-esc="doc"/>
+                        </div>
+                    </t>
+                </div>
             </section>
             
         </xpath>
@@ -213,6 +224,17 @@
                         <p><strong>Destination Port:</strong> <span t-field="order.destination_port_id"/></p>
                         <p><strong>Remarks Text:</strong> <span t-field="order.remarks"/></p>
                     </div>
+                </div>
+                <h3 class="">Documents</h3>
+                <hr class="mt-0 mb-1"/>
+                <t t-set="documents" t-value="order.document_ids.mapped('name')"/>
+                <div class="row ml-1">
+                    <t t-foreach="documents" t-as="doc">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" t-att-id="'%sCheck'%doc" t-att-checked="True"/>
+                            <label class="form-check-label" t-att-for="'%sCheck'%doc" t-esc="doc"/>
+                        </div>
+                    </t>
                 </div>
             </div>
             
